@@ -16,11 +16,11 @@
 
 - 取色器
 设置快捷键即可截取鼠标位置选中颜色, 同时具备查看截取颜色历史记录
-![Screenshot](https://github.com/HenJigg/WeTool/blob/master/img/ColorPicker.png)
+![Screenshot](https://github.com/HenJigg/WeTool/blob/main/img/ColorPicker.png)
 
 - 字体查看器
 可以快速打开ttf文件, 查看其中的字体目标代码,提供一键复制功能
-![Screenshot](https://github.com/HenJigg/WeTool/blob/master/img/FontPicker.png)
+![Screenshot](https://github.com/HenJigg/WeTool/blob/main/img/FontPicker.png)
 
 - 颜色主题
-![Screenshot](https://github.com/HenJigg/WeTool/blob/master/img/Theme.png)
+![Screenshot](https://github.com/HenJigg/WeTool/blob/main/img/Theme.png)
