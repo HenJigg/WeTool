@@ -1,8 +1,8 @@
 ## 魔法工具箱
-开发工具: VisualStudio 2019
-目标框架: .NET 5
-开发语言: C#/WPF
-第三方组件: 
+开发工具: VisualStudio 2019  
+目标框架: .NET 5  
+开发语言: C#/WPF  
+第三方组件:   
 - Prism8.x 
 - MaterialDesign Toolkit
 
