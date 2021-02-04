@@ -1,5 +1,4 @@
-﻿using MaterialDesignInPrism.ColorPicker;
-using MaterialDesignInPrism.Core.Common;
+﻿using MaterialDesignInPrism.Core.Common;
 using MaterialDesignInPrism.Core.Service;
 using MaterialDesignInPrism.DeskTop.Views;
 using Prism.Ioc;
@@ -26,7 +25,8 @@ namespace MaterialDesignInPrism.DeskTop
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
-            moduleCatalog.AddModule<IColorPickerModule>();
+            moduleCatalog.AddModule<ColorPicker.ColorPickerModule>($"颜色拾取器,PickerView");
+            moduleCatalog.AddModule<FontPicker.FontPickerModule>($"字体查看器,FonPickerView");
             base.ConfigureModuleCatalog(moduleCatalog);
         }
     }

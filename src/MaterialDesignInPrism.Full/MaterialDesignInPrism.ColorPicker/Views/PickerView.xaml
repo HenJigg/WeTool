@@ -19,26 +19,12 @@
         </Grid.RowDefinitions>
 
         <Menu IsMainMenu="True">
-            <Image
-                Width="20"
-                Height="20"
-                Source="/logo.ico" />
             <MenuItem Header="设置" FontFamily="微软雅黑">
                 <MenuItem
                     Command="{Binding ExecuteCommand}"
                     CommandParameter="快捷键"
                     Header="快捷键" />
             </MenuItem>
-            <MenuItem
-                Command="{Binding ExecuteCommand}"
-                CommandParameter="最小化"
-                FontFamily="微软雅黑"
-                Header="最小化" />
-            <MenuItem
-                Command="{Binding ExecuteCommand}"
-                CommandParameter="退出"
-                FontFamily="微软雅黑"
-                Header="退出" />
             <materialDesign:PopupBox>
                 <materialDesign:PopupBox.ToggleContent>
                     <TextBlock Text="历史" FontFamily="微软雅黑" />
@@ -70,10 +56,5 @@
                 Padding="10"
                 FontSize="22" />
         </Border>
-
-        <materialDesign:Snackbar x:Name="SnackBar" Grid.Row="1"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Bottom"
-            MessageQueue="{materialDesign:MessageQueue}" />
     </Grid>
 </UserControl>

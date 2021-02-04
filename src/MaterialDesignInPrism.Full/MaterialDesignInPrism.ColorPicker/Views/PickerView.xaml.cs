@@ -56,7 +56,6 @@ namespace MaterialDesignInPrism.ColorPicker.Views
                     string value = txtValue.Text;
                     Clipboard.SetDataObject(txtValue.Text, false);
                     (this.DataContext as PickerViewModel).Add(value);
-                    SnackBar.MessageQueue.Enqueue($"{value}复制成功!");
                     handled = true;
                     break;
             }

@@ -1,13 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <AssemblyName>颜色拾取器</AssemblyName>
+    <AssemblyName>魔法工具箱</AssemblyName>
     <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="logo.ico" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="4.0.0-ci2397" />
@@ -16,8 +19,6 @@
   <ItemGroup>
     <ProjectReference Include="..\MaterialDesignInPrism.ColorPicker\MaterialDesignInPrism.ColorPicker.csproj" />
     <ProjectReference Include="..\MaterialDesignInPrism.Core\MaterialDesignInPrism.Core.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="logo.ico" />
+    <ProjectReference Include="..\MaterialDesignInPrism.FontPicker\MaterialDesignInPrism.FontPicker.csproj" />
   </ItemGroup>
 </Project>

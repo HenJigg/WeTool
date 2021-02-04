@@ -1,121 +1,57 @@
-﻿using MaterialDesignInPrism.Core.Config;
-using MaterialDesignInPrism.Core.Service;
+﻿using MaterialDesignInPrism.Core.Service;
 using MaterialDesignInPrism.Core.Extensions;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 using System.Collections.ObjectModel;
+using Prism.Modularity;
+using System.Reflection;
+using System;
 
 namespace MaterialDesignInPrism.DeskTop.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
         private readonly IRegionManager regionManager;
-        private readonly IDialogHostService dialog;
-        private readonly IRegionNavigationJournal journal;
+        private readonly IModuleCatalog moduleCatalog;
 
-        public MainWindowViewModel(IRegionManager regionManager, IDialogHostService dialog)
+        public MainWindowViewModel(IRegionManager regionManager, IModuleCatalog moduleCatalog)
         {
-            this.dialog = dialog;
+            this.moduleCatalog = moduleCatalog;
             this.regionManager = regionManager;
-            HomeCommand = new DelegateCommand(GoHome);
-            MovePrevCommand = new DelegateCommand(MovePrev);
-            MoveNextCommand = new DelegateCommand(MoveNext);
-            NavigationCommand = new DelegateCommand<ModuleConfig>(NavigationPage);
-
-            _moduleConfigs = CreateModuleConfigs();
+            ModuleInfos = new ObservableCollection<ModuleInfo>();
+            InitModuleConfig();
+            NavigationCommand = new DelegateCommand<string>(NavigationPage);
         }
 
-        #region Command
+        public DelegateCommand<string> NavigationCommand { get; private set; }
 
-        public DelegateCommand HomeCommand { get; private set; }
-        public DelegateCommand MovePrevCommand { get; private set; }
-        public DelegateCommand MoveNextCommand { get; private set; }
-        public DelegateCommand<ModuleConfig> NavigationCommand { get; private set; }
+        private ObservableCollection<ModuleInfo> moduleInfos;
 
-        #endregion
-
-        #region Property
-
-        private ModuleConfig _selectModuleConfig;
-
-        public ModuleConfig SelectModuleConfig
+        public ObservableCollection<ModuleInfo> ModuleInfos
         {
-            get { return _selectModuleConfig; }
-            set { _selectModuleConfig = value; RaisePropertyChanged(); }
+            get { return moduleInfos; }
+            set { moduleInfos = value; RaisePropertyChanged(); }
         }
 
-        #endregion
-
-        #region Method
-
-        /// <summary>
-        /// 下一步
-        /// </summary>
-        private void MoveNext()
+        public void InitModuleConfig()
         {
-            if (journal != null && journal.CanGoForward)
-                journal.GoForward();
-        }
+            var modules = moduleCatalog.Modules;
 
-        /// <summary>
-        /// 上一步
-        /// </summary>
-        private void MovePrev()
-        {
-            if (journal != null && journal.CanGoBack)
-                journal.GoBack();
-        }
-
-        /// <summary>
-        /// 返回首页
-        /// </summary>
-        private void GoHome()
-        {
-            NavigationPage("HomeView");
-        }
-
-        private void NavigationPage(ModuleConfig config)
-        {
-            if (config == null) return;
-
-            SelectModuleConfig = config;
-            SelectModuleConfig.IsActive = false;
-
-            NavigationPage(config.Code);
-        }
-
-        /// <summary>
-        /// 导航页
-        /// </summary>
-        /// <param name="moduleName"></param>
-        void NavigationPage(string moduleName)
-        {
-            if (string.IsNullOrWhiteSpace(moduleName)) return;
-
-            var result = regionManager.Regions["ContentRegion"].Navigate(moduleName);
-        }
-
-        /// <summary>
-        /// 应用菜单
-        /// </summary>
-        /// <returns></returns>
-        ObservableCollection<ModuleConfig> CreateModuleConfigs()
-        {
-            return new ObservableCollection<ModuleConfig>
+            foreach (var item in modules)
             {
-                new ModuleConfig("个性化","SkinView","ColorLens")
-            };
+                var itr = item.ModuleName.Split(",");
+                ModuleInfos.Add(new ModuleInfo()
+                {
+                    ModuleCode = itr[1],
+                    ModuleName = itr[0]
+                });
+            }
         }
 
-        #endregion
-
-        private ObservableCollection<ModuleConfig> _moduleConfigs;
-
-        public ObservableCollection<ModuleConfig> ModuleConfigs
+        private void NavigationPage(string obj)
         {
-            get { return _moduleConfigs; }
-            set { _moduleConfigs = value; RaisePropertyChanged(); }
+            regionManager.Regions["ContentRegion"].RequestNavigate(obj);
         }
 
     }

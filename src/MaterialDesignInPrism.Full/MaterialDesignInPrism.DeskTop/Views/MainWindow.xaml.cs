@@ -1,5 +1,6 @@
 ﻿using MaterialDesignInPrism.Core.Common;
 using Prism.Events;
+using System;
 using System.Windows;
 
 namespace MaterialDesignInPrism.DeskTop.Views
@@ -9,8 +10,6 @@ namespace MaterialDesignInPrism.DeskTop.Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly IEventAggregator aggregator;
-
         public MainWindow(IEventAggregator aggregator)
         {
             InitializeComponent();
@@ -19,11 +18,21 @@ namespace MaterialDesignInPrism.DeskTop.Views
                 if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
                     this.DragMove();
             };
-            this.aggregator = aggregator;
-            this.aggregator.GetEvent<StringEvent>().Subscribe(arg =>
+            aggregator.GetEvent<StringEvent>().Subscribe(arg =>
             {
-                this.WindowState = WindowState.Minimized;
+                if (string.IsNullOrWhiteSpace(arg))
+                    this.WindowState = WindowState.Minimized;
+                else
+                {
+                    App.Current.Dispatcher.Invoke(() =>
+                    {
+                        SnackBar.MessageQueue.Enqueue(arg + "");
+                    });
+                }
             });
+
+            this.btnmin.Click += (s, e) => this.WindowState = WindowState.Minimized;
+            this.btnexit.Click += (s, e) => Environment.Exit(0);
         }
     }
 }

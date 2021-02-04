@@ -50,15 +50,16 @@ namespace MaterialDesignInPrism.ColorPicker.ViewModels
         public void Add(string value)
         {
             if (ColorList.FirstOrDefault(t => t.Equals(value)) == null)
+            {
                 ColorList.Add(value);
+                aggregator.GetEvent<StringEvent>().Publish("复制成功!");
+            }
         }
 
         private void Execute(string obj)
         {
             switch (obj)
             {
-                case "最小化": aggregator.GetEvent<StringEvent>().Publish(""); break;
-                case "退出": Environment.Exit(0); break;
                 case "快捷键": NavigationPage("SettingView"); break;
             }
         }

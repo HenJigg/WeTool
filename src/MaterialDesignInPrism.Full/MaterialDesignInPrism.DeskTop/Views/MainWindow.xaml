@@ -6,9 +6,9 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
-    Title="颜色拾取器"
-    Width="400"
-    Height="350"
+    Title="魔法工具箱"
+    Width="600"
+    Height="450"
     d:Height="768"
     d:Width="1080"
     prism:ViewModelLocator.AutoWireViewModel="True"
@@ -26,6 +26,58 @@
             Color="#FF858484" />
     </Window.Effect>
     <materialDesign:DialogHost Identifier="Root">
-        <ContentControl prism:RegionManager.RegionName="ContentRegion" />
+        <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+            <Grid>
+                <DockPanel>
+                    <materialDesign:ColorZone
+                        Padding="16"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                        DockPanel.Dock="Top"
+                        Mode="PrimaryMid">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal">
+                                <Image
+                                    Width="35"
+                                    Height="35"
+                                    Source="../logo.ico" />
+                                <TextBlock
+                                    Text="魔法工具箱"
+                                    Margin="10,0"
+                                    VerticalAlignment="Center"
+                                    FontSize="18"
+                                    FontFamily="微软雅黑" />
+                            </StackPanel>
+
+                            <materialDesign:PopupBox
+                                HorizontalAlignment="Right"
+                                PlacementMode="BottomAndAlignRightEdges"
+                                StaysOpen="False">
+                                <StackPanel>
+                                    <ItemsControl ItemsSource="{Binding ModuleInfos}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Button
+                                                    Content="{Binding ModuleName}"
+                                                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}, Path=DataContext.NavigationCommand}"
+                                                    CommandParameter="{Binding ModuleCode}" />
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                    <Button x:Name="btnmin" Content="最小化" />
+                                    <Button x:Name="btnexit" Content="关闭" />
+                                </StackPanel>
+                            </materialDesign:PopupBox>
+                        </Grid>
+                    </materialDesign:ColorZone>
+                    <ContentControl prism:RegionManager.RegionName="ContentRegion" />
+                </DockPanel>
+
+                <materialDesign:Snackbar x:Name="SnackBar"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    MessageQueue="{materialDesign:MessageQueue}" />
+            </Grid>
+        </materialDesign:DrawerHost>
     </materialDesign:DialogHost>
 </Window>
