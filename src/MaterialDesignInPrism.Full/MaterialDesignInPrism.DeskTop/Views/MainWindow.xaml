@@ -12,11 +12,11 @@
     d:Height="768"
     d:Width="1080"
     prism:ViewModelLocator.AutoWireViewModel="True"
-    BorderThickness="20"
     AllowsTransparency="True"
+    BorderThickness="20"
+    Style="{StaticResource MaterialDesignWindow}"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
-    Style="{StaticResource MaterialDesignWindow}"
     mc:Ignorable="d">
     <Window.Effect>
         <DropShadowEffect
