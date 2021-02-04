@@ -1,4 +1,5 @@
 ﻿using MaterialDesignInPrism.Core.Common;
+using Microsoft.Win32;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -29,6 +30,12 @@ namespace MaterialDesignInPrism.FontPicker.ViewModels
             switch (obj)
             {
                 case "打开文件":
+                    {
+                        OpenFileDialog dialog = new OpenFileDialog();
+                        dialog.Filter = "所有文件(*.ttf)|*.ttf";
+                        var result = dialog.ShowDialog();
+                        if((bool)result) AddFile(dialog.FileName);
+                    }
                     break;
                 case "清空":
                     GridFontList.Clear();

@@ -25,10 +25,7 @@
                     CommandParameter="快捷键"
                     Header="快捷键" />
             </MenuItem>
-            <materialDesign:PopupBox>
-                <materialDesign:PopupBox.ToggleContent>
-                    <TextBlock Text="历史" FontFamily="微软雅黑" />
-                </materialDesign:PopupBox.ToggleContent>
+            <materialDesign:PopupBox ToolTip="查看历史记录">
                 <ItemsControl ItemsSource="{Binding ColorList}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>

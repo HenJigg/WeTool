@@ -12,6 +12,7 @@
     d:Height="768"
     d:Width="1080"
     prism:ViewModelLocator.AutoWireViewModel="True"
+    FontFamily="微软雅黑"
     AllowsTransparency="True"
     BorderThickness="20"
     Style="{StaticResource MaterialDesignWindow}"
@@ -63,7 +64,10 @@
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
-
+                                    <Button
+                                        Content="主题"
+                                        Command="{Binding NavigationCommand}"
+                                        CommandParameter="SkinView" />
                                     <Button x:Name="btnmin" Content="最小化" />
                                     <Button x:Name="btnexit" Content="关闭" />
                                 </StackPanel>
