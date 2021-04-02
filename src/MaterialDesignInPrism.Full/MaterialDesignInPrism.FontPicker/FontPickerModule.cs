@@ -8,9 +8,7 @@ namespace MaterialDesignInPrism.FontPicker
     public class FontPickerModule : IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)
-        {
-
-        }
+        { }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
